@@ -8,7 +8,7 @@
 - Add to your project class module [дуэлянт.cls](дуэлянт.cls)
 - Add to your project class module [револьверСоднимПатроном.cls](револьверСоднимПатроном.cls)
 - Run КакЭтоБыло()
-## Example of Immediate window:
+## Example of Immediate window
 ```
 Дуэлянт №1 крутанул барабан 14:48:29
 Дуэлянт №1 услышал звук вращающегося барабана в 14:48:29
