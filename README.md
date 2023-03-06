@@ -1,6 +1,7 @@
 # Raising Custom Events in VBA
 ## Credits
 - Mike Wolfe - for [Raising Custom Events in VBA](https://nolongerset.com/raising-custom-events-in-vba/)
+- Mikhail Lermontov - for [A Hero of Our Time](https://en.wikipedia.org/wiki/A_Hero_of_Our_Time)
 
 ## Usage
 - Add to your project module [main.bas](main.bas)
