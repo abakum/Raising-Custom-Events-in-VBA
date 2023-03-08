@@ -7,40 +7,51 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'a Listener class that handles events via WithEvents
-
-Option Explicit
-
+'класс Слушатель обрабатывает События объектов через WithEvents
 Public WithEvents револьвер As револьверСоднимПатроном
-Attribute револьвер.VB_VarHelpID = -1
-Private убит_
-Private имя_
+Public WithEvents мотор As часы
+
+'класс Вещатель который описыват События Event и вызывает RaiseEvent в теле methods/functions/properties
+Public Event Пульс()
+
+Private нетПульса
 Private дулоУвиска
+Private имя_
 
+'обработчики событий
 Private Sub Class_Initialize()
- убит_ = False
+ нетПульса = False
+ Set мотор = сердце
 End Sub
-
+Private Sub Class_Terminate()
+ нетПульса = True
+ Set мотор = Nothing
+End Sub
+Private Sub мотор_такт()
+ If нетПульса Then Exit Sub
+ RaiseEvent Пульс
+End Sub
 Private Sub револьвер_ЗвукВращающегосяБарабана()
- If убит_ Then Exit Sub
- Debug.Print имя; " услышал звук вращающегося барабана в "; Format(Now, "h:mm:ss")
+ If нетПульса Then Exit Sub
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал звук вращающегося барабана"
 End Sub
 Private Sub револьвер_ЗвукВращающегосяБарабанаЗатих()
- If убит_ Then Exit Sub
- Debug.Print имя; " услышал, что звук вращающегося барабана затих в "; Format(Now, "h:mm:ss")
+ If нетПульса Then Exit Sub
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал, что звук вращающегося барабана затих"
 End Sub
 Private Sub револьвер_ЩелкнулКурком()
- If убит_ Then Exit Sub
- Debug.Print имя; " услышал щелчок курка в "; Format(Now, "h:mm:ss")
+ If нетПульса Then Exit Sub
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал щелчок курка"
 End Sub
 Private Sub револьвер_Выстрелил()
  If дулоУвиска Then
-  убит_ = True
+  нетПульса = True
  Else
-  Debug.Print имя; " услышал выстрел в "; Format(Now, "h:mm:ss")
+  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал выстрел"
  End If
 End Sub
 
+'свойства
 Public Property Let имя(s)
  имя_ = s
 End Property
@@ -48,34 +59,28 @@ Public Property Get имя()
  имя = имя_
 End Property
 
-Public Property Get убит()
- убит = убит_
-End Property
-
+'методы
 Public Sub ПриставилДулоКвиску()
- If убит_ Then Exit Sub
+ If нетПульса Then Exit Sub
  Debug.Print
- Debug.Print имя; " приставил дуло к своему виску в "; Format(Now, "h:mm:ss")
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " приставил дуло к своему виску"
  дулоУвиска = True
  WaitSec RandomInt(1, 6)
 End Sub
-
-Public Sub ПередалРевольвер()
- If убит_ Then Exit Sub
+Public Function ПередалРевольвер()
+ If нетПульса Then Exit Function
  дулоУвиска = False
  WaitSec RandomInt(1, 6)
- Debug.Print имя; " передал револьвер "; Format(Now, "h:mm:ss")
-End Sub
-
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " передал револьвер"
+ ПередалРевольвер = True
+End Function
 Public Sub НажалНаСпусковойКрючок()
- If убит_ Then Exit Sub
- Debug.Print имя; " нажал на спусковой крючок "; Format(Now, "h:mm:ss")
+ If нетПульса Then Exit Sub
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " нажал на спусковой крючок"
  револьвер.НажатСпусковойКрючок
 End Sub
-
 Public Sub КрутанулБарабан()
- If убит_ Then Exit Sub
- Debug.Print имя; " крутанул барабан "; Format(Now, "h:mm:ss")
+ If нетПульса Then Exit Sub
+ Debug.Print Format(Now, "h:mm:ss"); " "; имя; " крутанул барабан"
  револьвер.КрутанутБарабан
 End Sub
-
