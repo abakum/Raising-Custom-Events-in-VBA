@@ -7,11 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-'an Announcer class that declares a module-level Public Event
-'and then calls RaiseEvent within the class body (methods/functions/properties)
-Option Explicit
-
-'Custom events must be declared at the top of a class module
+'класс Вещатель который описыват События Event и вызывает RaiseEvent в теле methods/functions/properties
 Public Event Выстрелил()
 Public Event ЩелкнулКурком()
 Public Event ЗвукВращающегосяБарабана()
@@ -21,6 +17,7 @@ Private сколькоЗарядный_
 Private камораСпатроном
 Private камораПодКурком
 
+'свойства
 Public Property Let сколькоЗарядный(b)
  сколькоЗарядный_ = b
 End Property
@@ -28,6 +25,7 @@ Public Property Get сколькоЗарядный()
  сколькоЗарядный = сколькоЗарядный_
 End Property
 
+'методы
 Public Sub КрутанутБарабан()
  RaiseEvent ЗвукВращающегосяБарабана
  Randomize
@@ -36,7 +34,6 @@ Public Sub КрутанутБарабан()
  камораСпатроном = RandomInt(0, сколькоЗарядный_) '0 - осечка
  RaiseEvent ЗвукВращающегосяБарабанаЗатих
 End Sub
-
 Public Sub НажатСпусковойКрючок()
  If камораПодКурком = сколькоЗарядный_ Then
   камораПодКурком = 1
@@ -50,4 +47,3 @@ Public Sub НажатСпусковойКрючок()
   RaiseEvent ЩелкнулКурком
  End If
 End Sub
-
