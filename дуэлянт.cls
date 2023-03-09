@@ -9,27 +9,25 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 'класс Слушатель обрабатывает События объектов через WithEvents
 Public WithEvents револьвер As револьверСоднимПатроном
-Public WithEvents мотор As часы
 
 'класс Вещатель который описыват События Event и вызывает RaiseEvent в теле methods/functions/properties
 Public Event Пульс()
 
+Private имя_
+Private какПозже_
+Private позже
 Private нетПульса
 Private дулоУвиска
-Private имя_
 
 'обработчики событий
 Private Sub Class_Initialize()
  нетПульса = False
- Set мотор = сердце
+ ЧСС = 60
+ жди Me
 End Sub
 Private Sub Class_Terminate()
  нетПульса = True
- Set мотор = Nothing
-End Sub
-Private Sub мотор_такт()
- If нетПульса Then Exit Sub
- RaiseEvent Пульс
+ 'жди Me, False
 End Sub
 Private Sub револьвер_ЗвукВращающегосяБарабана()
  If нетПульса Then Exit Sub
@@ -45,6 +43,7 @@ Private Sub револьвер_ЩелкнулКурком()
 End Sub
 Private Sub револьвер_Выстрелил()
  If дулоУвиска Then
+  планировщик Me, False
   нетПульса = True
  Else
   Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал выстрел"
@@ -52,11 +51,14 @@ Private Sub револьвер_Выстрелил()
 End Sub
 
 'свойства
-Public Property Let имя(s)
- имя_ = s
+Public Property Let имя(строка)
+ имя_ = строка
 End Property
 Public Property Get имя()
  имя = имя_
+End Property
+Public Property Let ЧСС(целое)
+ какПозже_ = TimeSerial(0, 0, 60 / целое)
 End Property
 
 'методы
@@ -83,4 +85,15 @@ Public Sub КрутанулБарабан()
  If нетПульса Then Exit Sub
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " крутанул барабан"
  револьвер.КрутанутБарабан
+End Sub
+Public Sub пора()
+ стоп
+ If нетПульса Then Exit Sub
+ RaiseEvent Пульс
+ позже = Now + какПозже_
+ Application.OnTime позже, "жди"
+End Sub
+Public Sub стоп()
+ On Error Resume Next
+ Application.OnTime позже, "жди", , False
 End Sub
