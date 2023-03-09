@@ -5,11 +5,10 @@
 
 ## Usage
 - Add to your project module [main.bas](main.bas)
-- Add to your project module [пламенныйМотор.bas](пламенныйМотор.bas)
+- Add to your project module [серце.bas](серце.bas)
 - Add to your project class module [дуэлянт.cls](дуэлянт.cls)
 - Add to your project class module [револьверСоднимПатроном.cls](револьверСоднимПатроном.cls)
 - Add to your project class module [доктор.cls](доктор.cls)
-- Add to your project class module [часы.cls](часы.cls)
 - Run КакЭтоБыло()
 ## Example of Immediate window
 ```
