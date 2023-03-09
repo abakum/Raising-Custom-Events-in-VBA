@@ -2,7 +2,6 @@ Attribute VB_Name = "main"
 'https://nolongerset.com/raising-custom-events-in-vba/
 Option Base 1
 Sub какЭтоБыло()
- кардиоСтимулятор 'Application.OnTime не может запускать процедуры из модулей класса
  Set наган = New револьверСоднимПатроном
  наган.сколькоЗарядный = 6
  Dim дуэлянты(2) As дуэлянт
@@ -30,12 +29,12 @@ Sub какЭтоБыло()
 La_commedia_e_finita:
  Debug.Print "– Finita la comedia! – сказал я доктору."
 finally:
+ жди , False 'остановит все жди
  Set Вернер = Nothing
  For i = LBound(дуэлянты) To UBound(дуэлянты)
   Set дуэлянты(i) = Nothing
  Next i
  Set наган = Nothing
- кардиоСтимулятор False
 End Sub
 
 'возвращает случайное целое между значениями Min и Max включительно
