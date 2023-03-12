@@ -7,6 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+#Const отладка = 0
 'класс Слушатель обрабатывает События объектов через WithEvents
 Public WithEvents револьвер As револьверСоднимПатроном
 
@@ -26,26 +27,22 @@ Private Sub Class_Initialize()
  жди Me
 End Sub
 Private Sub Class_Terminate()
- 'конец = True
+ 'Class_Terminate не сработает пока есть ссылки на дуэлянта а они есть в коллекции классы
+ 'поэтому  надо запускать 'жди' в main перед деструкцией классов из которых вызывается жди Me
+ стоп
 End Sub
 Private Sub револьвер_ЗвукВращающегосяБарабана()
- If конец Then Exit Sub
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал звук вращающегося барабана"
 End Sub
 Private Sub револьвер_ЗвукВращающегосяБарабанаЗатих()
- If конец Then Exit Sub
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал, что звук вращающегося барабана затих"
 End Sub
 Private Sub револьвер_ЩелкнулКурком()
- If конец Then Exit Sub
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал щелчок курка"
 End Sub
 Private Sub револьвер_Выстрелил()
- If конец Then Exit Sub
  If дулоУвиска Then
-  конец = True
   стоп
-  жди Me, -1
  Else
   Debug.Print Format(Now, "h:mm:ss"); " "; имя; " услышал выстрел"
  End If
@@ -59,7 +56,8 @@ Public Property Get имя()
  имя = имя_
 End Property
 Public Property Let ЧСС(целое)
- какПозже = TimeSerial(0, 0, 60 / IIf(целое > 119, 119, целое)) '120 вешает эксел
+ '120 вешает эксел так как параметр EarliestTime округляется до ближайшей целой секунды. То есть 60/120~0
+ какПозже = TimeSerial(0, 0, 60 / IIf(целое > 119, 119, целое))
 End Property
 
 'методы
@@ -68,12 +66,12 @@ Public Sub ПриставилДулоКвиску()
  Debug.Print
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " приставил дуло к своему виску"
  дулоУвиска = True
- WaitSec RandomInt(1, 6)
+ ждатьСекунд Случайное(1, 6)
 End Sub
 Public Function ПередалРевольвер()
  If конец Then Exit Function
  дулоУвиска = False
- WaitSec RandomInt(1, 6)
+ ждатьСекунд Случайное(1, 6)
  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " передал револьвер"
  ПередалРевольвер = True
 End Function
@@ -88,16 +86,23 @@ Public Sub КрутанулБарабан()
  револьвер.КрутанутБарабан
 End Sub
 Public Sub пора(целое)
- ждун = целое
- стоп
  If конец Then Exit Sub
+ ждун = целое
  RaiseEvent пульс
  позже = Now + какПозже
  Application.OnTime позже, "пора" & ждун
- 'Debug.Print Format(позже, "h:mm:ss"); " "; имя; " OnTime", ждун
+ #If отладка Then
+  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " OnTime", ждун, Format(позже, "h:mm:ss")
+ #End If
 End Sub
 Private Sub стоп()
+ #If отладка Then
+  Debug.Print Format(Now, "h:mm:ss"); " "; имя; " стоп", ждун
+ #End If
+ конец = True
+ Set револьвер = Nothing
  On Error Resume Next
  Application.OnTime позже, "пора" & ждун, , False
- 'Debug.Print Format(Now, "h:mm:ss"); " "; имя; " стоп", ждун
+ жди Me, False
 End Sub
+
