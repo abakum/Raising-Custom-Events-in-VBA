@@ -7,6 +7,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
+#Const отладка = 0
+#Const осечка = 0
 'класс Вещатель который описыват События Event и вызывает RaiseEvent в теле methods/functions/properties
 Public Event Выстрелил()
 Public Event ЩелкнулКурком()
@@ -30,9 +32,15 @@ Public Sub КрутанутБарабан()
  RaiseEvent ЗвукВращающегосяБарабана
  Randomize
  камораПодКурком = 1
- WaitSec RandomInt(1, 6)
- камораСпатроном = RandomInt(0, сколькоЗарядный_)
- 'камораСпатроном = 0 'осечка
+ ждатьСекунд Случайное(1, 6)
+ камораСпатроном = Случайное(0, сколькоЗарядный_)
+ #If отладка Then
+  #If осечка Then
+   камораСпатроном = 0 'осечка
+  #Else
+   камораСпатроном = 2 'выстрел с первого нажатия крючка
+  #End If
+ #End If
  RaiseEvent ЗвукВращающегосяБарабанаЗатих
 End Sub
 Public Sub НажатСпусковойКрючок()
