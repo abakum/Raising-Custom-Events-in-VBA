@@ -1,31 +1,29 @@
 Attribute VB_Name = "сердце"
 Private классы As New Collection
-Public Sub жди(Optional класс = Nothing, Optional таймер = 0)
- Dim i As Integer
- If класс Is Nothing Then
-  If таймер < 0 Then Set классы = New Collection 'жди , -1 - деструкция всех классов в коллекции
+Public Sub жди(Optional класс, Optional конструктор = True)
+ Dim и As Integer
+ If IsMissing(класс) Then
+  Set классы = New Collection 'жди - деструкция всех классов в коллекции 'классы'
  Else
-  If таймер = 0 Then
-   классы.Add класс 'жди Me - конструктор для асинхронных событий
+  If конструктор Then
+   классы.Add класс 'жди Me - вызывать из конструктора для асинхронных событий
    пора классы.Count
-  ElseIf таймер > 0 Then
-   пора таймер 'когда несколько классов вызывают асинхронных событий с одной частотой
   Else
-   For i = классы.Count To 1 Step -1
-    If VarType(классы(i)) = vbObject Then
-     If класс Is классы(i) Then
+   For и = классы.Count To 1 Step -1
+    If VarType(классы(и)) = vbObject Then
+     If класс Is классы(и) Then
       классы.Add Nothing, after:=i
-      классы.Remove i 'жди Me, -1 - останов асинхронных событий одного класса
+      классы.Remove и 'жди Me, False - вызывать для останова асинхронных событий
       Exit Sub
      End If
     End If
-   Next
+   Next и
   End If
  End If
 End Sub
-Public Sub пора(i)
+Public Sub пора(целое)
  On Error Resume Next
- CallByName классы(i), "пора", VbMethod, i
+ CallByName классы(целое), "пора", VbMethod, целое
 End Sub
 Public Sub пора1(): пора 1: End Sub
 Public Sub пора2(): пора 2: End Sub
