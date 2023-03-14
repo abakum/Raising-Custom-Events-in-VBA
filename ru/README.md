@@ -1,7 +1,7 @@
 # Вызов пользовательских событий в VBA
 ## Благодарности
 - Mike Wolfe - за [Raising Custom Events in VBA](https://nolongerset.com/raising-custom-events-in-vba)
-- Михаил Лермонтов - за [Герой нашего времени](https://ru.wikipedia.org/wiki/Герой_нашего_времени)
+- Михаилу Лермонтову - за [Герой нашего времени](https://ru.wikipedia.org/wiki/Герой_нашего_времени)
 
 ## Использование
 - Добавьте в свой проект иодуль [главный.bas](главный.bas)
