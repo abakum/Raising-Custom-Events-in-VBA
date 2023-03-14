@@ -2,11 +2,12 @@ Attribute VB_Name = "main"
 'https://nolongerset.com/raising-custom-events-in-vba/
 #Const deb = 0
 Sub howItWas()
- Set nagant = New RevolverWithSingleCartridge
- nagant.howMuchCharger = 7
- Dim duelists As New Collection
+ Dim nagant As New RevolverWithSingleCartridge
+ Dim first As Boolean
  Dim i As Integer
- Dim secondShooting As Boolean
+ Dim duelists As New Collection
+ nagant.howMuchCharger = 7
+ first = True
  For i = 1 To 2
   duelists.Add New duelist
   duelists(i).name = "Duelist #" & i
@@ -16,15 +17,15 @@ Sub howItWas()
  #If deb Then
   duelists(1).heartRate = 10 'test pulse events with different frequencies
   Verner.SeesThatRevolverTook duelists(1)
-  Verner.сountsPulse 'testing a doctor for the ability to count the pulse on a living patient
+  Verner.countsPulse  'testing a doctor for the ability to count the pulse on a living patient
  #End If
  duelists(1).spunDrum
  For i = 1 To nagant.howMuchCharger
-  Verner.SeesThatRevolverTook duelists(secondShooting + 2)
-  duelists(secondShooting + 2).putGunToHead
-  duelists(secondShooting + 2).pulledTrigger
-  If Not duelists(secondShooting + 2).handedRevolver Then GoTo La_commedia_e_finita
-  secondShooting = Not secondShooting
+  Verner.SeesThatRevolverTook duelists(first + 2)
+  duelists(first + 2).putGunToHead
+  duelists(first + 2).pulledTrigger
+  If Not duelists(first + 2).handedRevolver Then GoTo La_commedia_e_finita
+  first = Not first
  Next i
  Debug.Print "— and I, graf, have misfires, thank God."
  GoTo finally
@@ -52,4 +53,3 @@ End Sub
 Public Sub hangSec(Optional sec As Single = 1)
  Application.wait (Now + TimeSerial(0, 0, sec))
 End Sub
-
