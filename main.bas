@@ -6,7 +6,7 @@ Sub howItWas()
  nagant.howMuchCharger = 7
  Dim duelists As New Collection
  Dim i As Integer
- Dim secondShooting
+ Dim secondShooting As Boolean
  For i = 1 To 2
   duelists.Add New duelist
   duelists(i).name = "Duelist #" & i
@@ -16,14 +16,14 @@ Sub howItWas()
  #If deb Then
   duelists(1).heartRate = 10 'test pulse events with different frequencies
   Verner.SeesThatRevolverTook duelists(1)
-  Verner.ñountsPulse 'testing a doctor for the ability to count the pulse on a living patient
+  Verner.сountsPulse 'testing a doctor for the ability to count the pulse on a living patient
  #End If
  duelists(1).spunDrum
  For i = 1 To nagant.howMuchCharger
-  Verner.SeesThatRevolverTook duelists(1 + secondShooting)
-  duelists(1 + secondShooting).putGunToHead
-  duelists(1 + secondShooting).pulledTrigger
-  If Not duelists(1 + secondShooting).handedRevolver Then GoTo La_commedia_e_finita
+  Verner.SeesThatRevolverTook duelists(secondShooting + 2)
+  duelists(secondShooting + 2).putGunToHead
+  duelists(secondShooting + 2).pulledTrigger
+  If Not duelists(secondShooting + 2).handedRevolver Then GoTo La_commedia_e_finita
   secondShooting = Not secondShooting
  Next i
  Debug.Print "— and I, graf, have misfires, thank God."
