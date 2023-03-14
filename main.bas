@@ -1,61 +1,55 @@
 Attribute VB_Name = "main"
 'https://nolongerset.com/raising-custom-events-in-vba/
-Option Base 1
-#Const отладка = 0
-Sub какЭтоБыло()
- Set наган = New револьверСоднимПатроном
- наган.сколькоЗарядный = 6
- Dim дуэлянты(2) As дуэлянт
- Dim и As Integer
- For и = LBound(дуэлянты) To UBound(дуэлянты)
-  Set дуэлянты(и) = New дуэлянт
-  With дуэлянты(и)
-   .имя = "Дуэлянт №" & и
-   Set .револьвер = наган 'дуэлянты используют один и тот же револьвер
-  End With
- Next и
- Dim Вернер As New доктор
- #If отладка Then
-  дуэлянты(1).ЧСС = 10 'тестим события пульс с разной частотой
-  Вернер.ВидитЧтоРевольверВзял дуэлянты(1)
-  Вернер.СчитаетПульс 'тестим доктора на умение считать пульс на живом пациенте
+#Const deb = 0
+Sub howItWas()
+ Set nagant = New RevolverWithSingleCartridge
+ nagant.howMuchCharger = 7
+ Dim duelists As New Collection
+ Dim i As Integer
+ Dim secondShooting
+ For i = 1 To 2
+  duelists.Add New duelist
+  duelists(i).name = "Duelist #" & i
+  Set duelists(i).revolver = nagant 'duelists use the same revolver
+ Next i
+ Dim Verner As New doctor
+ #If deb Then
+  duelists(1).heartRate = 10 'test pulse events with different frequencies
+  Verner.SeesThatRevolverTook duelists(1)
+  Verner.ñountsPulse 'testing a doctor for the ability to count the pulse on a living patient
  #End If
- дуэлянты(1).КрутанулБарабан
- For и = 1 To наган.сколькоЗарядный
-  чьяОчередь = ((и - 1) Mod 2) + 1
-  Вернер.ВидитЧтоРевольверВзял дуэлянты(чьяОчередь)
-  With дуэлянты(чьяОчередь)
-   .ПриставилДулоКвиску
-   .НажалНаСпусковойКрючок
-    If Not .ПередалРевольвер Then GoTo La_commedia_e_finita
-  End With
- Next и
- Debug.Print "— и у меня, граф, бывают осечки, слава Богу."
+ duelists(1).spunDrum
+ For i = 1 To nagant.howMuchCharger
+  Verner.SeesThatRevolverTook duelists(1 + secondShooting)
+  duelists(1 + secondShooting).putGunToHead
+  duelists(1 + secondShooting).pulledTrigger
+  If Not duelists(1 + secondShooting).handedRevolver Then GoTo La_commedia_e_finita
+  secondShooting = Not secondShooting
+ Next i
+ Debug.Print "— and I, graf, have misfires, thank God."
  GoTo finally
 La_commedia_e_finita:
- Debug.Print "– Finita la comedia! – сказал я доктору."
+ Debug.Print "— Finita la comedia! I said to the doctor."
 finally:
- жди 'надо запускать перед деструкцией классов из которых вызывается жди Me
- Set Вернер = Nothing
- For и = LBound(дуэлянты) To UBound(дуэлянты)
-  Set дуэлянты(и) = Nothing
- Next и
- Set наган = Nothing
+ expect 'must be run to cancel all expected 'onTimeX' and to destroy classes from which 'expect Me' was called
+ Set Verner = Nothing
+ Set duelists = Nothing
+ Set nagant = Nothing
 End Sub
 
-'возвращает случайное целое между значениями мин и макс включительно
-Public Function Случайное(ByVal мин As Long, ByVal макс As Long) As Long
- Случайное = (Rnd() * (макс - мин)) + мин
+'returns a random integer between min and max values inclusive
+Public Function random(ByVal min As Long, ByVal max As Long) As Long
+ random = (Rnd() * (max - min)) + min
 End Function
-'не блокирующая событий задержка на 'сек' секунд
-Public Sub ждатьСекунд(Optional сек As Single = 1)
+'delay allowing events to happen by 'sec' seconds
+Public Sub waitSec(Optional sec As Single = 1)
  T0 = Timer
  Do
   DoEvents
- Loop Until Timer - T0 >= сек
+ Loop Until Timer - T0 >= sec
 End Sub
-'блокирующая события задержка выполнения на 'сек' секунд
-Public Sub висетьСекунд(Optional сек As Single = 1)
- Application.Wait (Now + TimeSerial(0, 0, сек))
+'event-blocking execution delay of 'sec' seconds
+Public Sub hangSec(Optional sec As Single = 1)
+ Application.wait (Now + TimeSerial(0, 0, sec))
 End Sub
 
