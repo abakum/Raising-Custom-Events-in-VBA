@@ -17,12 +17,6 @@ Public Property Get пора()
 End Property
 #End If
 Private классы As New Collection
-Private Sub замена(коллекция As Collection, и, Optional элемент = Nothing)
- If коллекция.Count = 0 Then Exit Sub
- коллекция.Add элемент, after:=и
- коллекция.Remove и
- If Not элемент Is Nothing Then пора и
-End Sub
 Public Sub жди(Optional класс, Optional конструктор = True)
  Dim и As Integer
  If IsMissing(класс) Then 'жди' вызывать из 'главный'
@@ -35,7 +29,9 @@ Public Sub жди(Optional класс, Optional конструктор = True)
   If конструктор Then 'жди Me' вызывать из конструктора
    For и = классы.Count To 1 Step -1
     If классы(и) Is Nothing Then
-     замена классы, и, класс
+     классы.Add класс, after:=и
+     классы.Remove и
+     пора и
      Exit Sub
     End If
    Next и
@@ -46,7 +42,8 @@ Public Sub жди(Optional класс, Optional конструктор = True)
    For и = классы.Count To 1 Step -1
     If класс Is классы(и) Then 'жди Me, False' вызывать из деструктора
      Application.onTime CallByName(классы(и), "пора", VbGet), "пора" & и, , False
-     замена классы, и
+     классы.Add Nothing, after:=и
+     классы.Remove и
      Exit Sub
     End If
    Next и
