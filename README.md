@@ -12,40 +12,40 @@
 - Run howItWas() from `main`
 ## Example of Immediate window
 ```
-15:15:30 Duelist #1 spun the drum
-15:15:30 Duelist #1 heard the sound of a spinning drum
-15:15:30 Duelist #2 heard the sound of a spinning drum
-15:15:33 Duelist #1 heard the sound of the spinning drum fade away
-15:15:33 Duelist #2 heard the sound of the spinning drum fade away
+22:58:52 Duelist #1 spun the drum
+22:58:52 Duelist #1 heard the sound of a spinning drum
+22:58:52 Duelist #2 heard the sound of a spinning drum
+22:58:56 Duelist #1 heard the sound of the spinning drum fade away
+22:58:56 Duelist #2 heard the sound of the spinning drum fade away
 
-15:15:33 Duelist #2 put the gun to his head
-15:15:35 Duelist #2 pulled the trigger
-15:15:35 Duelist #1 heard the click of a hammer
-15:15:35 Duelist #2 heard the click of a hammer
-15:15:40 Duelist #2 handed revolver
+22:58:56 Duelist #1 put the gun to his head
+22:58:59 Duelist #1 pulled the trigger
+22:58:59 Duelist #1 heard the click of a hammer
+22:58:59 Duelist #2 heard the click of a hammer
+22:59:01 Duelist #1 handed revolver
 
-15:15:40 Duelist #1 put the gun to his head
-15:15:45 Duelist #1 pulled the trigger
-15:15:45 Duelist #1 heard the click of a hammer
-15:15:45 Duelist #2 heard the click of a hammer
-15:15:47 Duelist #1 handed revolver
+22:59:01 Duelist #2 put the gun to his head
+22:59:07 Duelist #2 pulled the trigger
+22:59:07 Duelist #1 heard the click of a hammer
+22:59:07 Duelist #2 heard the click of a hammer
+22:59:12 Duelist #2 handed revolver
 
-15:15:47 Duelist #2 put the gun to his head
-15:15:53 Duelist #2 pulled the trigger
-15:15:53 Duelist #1 heard the click of a hammer
-15:15:53 Duelist #2 heard the click of a hammer
-15:15:59 Duelist #2 handed revolver
+22:59:12 Duelist #1 put the gun to his head
+22:59:17 Duelist #1 pulled the trigger
+22:59:17 Duelist #1 heard the click of a hammer
+22:59:17 Duelist #2 heard the click of a hammer
+22:59:23 Duelist #1 handed revolver
 
-15:15:59 Duelist #1 put the gun to his head
-15:16:04 Duelist #1 pulled the trigger
-15:16:04 Duelist #1 heard the click of a hammer
-15:16:04 Duelist #2 heard the click of a hammer
-15:16:08 Duelist #1 handed revolver
+22:59:23 Duelist #2 put the gun to his head
+22:59:25 Duelist #2 pulled the trigger
+22:59:25 Duelist #1 heard the click of a hammer
+22:59:25 Duelist #2 heard the click of a hammer
+22:59:28 Duelist #2 handed revolver
 
-15:16:08 Duelist #2 put the gun to his head
-15:16:12 Duelist #2 pulled the trigger
-15:16:12 Duelist #1 heard a shot
-15:16:12 The doctor counts the pulse Duelist #2
-15:16:18 The doctor said that Duelist #2 has no pulse
+22:59:28 Duelist #1 put the gun to his head
+22:59:30 Duelist #1 pulled the trigger
+22:59:30 Duelist #2 heard a shot
+22:59:30 The doctor counts the pulse Duelist #1
+22:59:36 The doctor said that Duelist #1 has no pulse
 — Finita la comedia! I said to the doctor.
 ```
