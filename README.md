@@ -5,41 +5,47 @@
 
 ## Usage
 - Add to your project module [main.bas](main.bas)
-- Add to your project module [серце.bas](серце.bas)
-- Add to your project class module [дуэлянт.cls](дуэлянт.cls)
-- Add to your project class module [револьверСоднимПатроном.cls](револьверСоднимПатроном.cls)
-- Add to your project class module [доктор.cls](доктор.cls)
-- Run КакЭтоБыло()
+- Add to your project module [heart.bas](heart.bas)
+- Add to your project class module [revolverWithSingleCartridge.cls](revolverWithSingleCartridge.cls)
+- Add to your project class module [duelist.cls](duelist.cls)
+- Add to your project class module [doctor.cls](doctor.cls)
+- Run howItWas() from `main`
 ## Example of Immediate window
 ```
-11:47:43 Дуэлянт №1 крутанул барабан
-11:47:43 Дуэлянт №1 услышал звук вращающегося барабана
-11:47:43 Дуэлянт №2 услышал звук вращающегося барабана
-11:47:46 Дуэлянт №1 услышал, что звук вращающегося барабана затих
-11:47:46 Дуэлянт №2 услышал, что звук вращающегося барабана затих
+15:15:30 Duelist #1 spun the drum
+15:15:30 Duelist #1 heard the sound of a spinning drum
+15:15:30 Duelist #2 heard the sound of a spinning drum
+15:15:33 Duelist #1 heard the sound of the spinning drum fade away
+15:15:33 Duelist #2 heard the sound of the spinning drum fade away
 
-11:47:46 Дуэлянт №1 приставил дуло к своему виску
-11:47:47 Дуэлянт №1 нажал на спусковой крючок
-11:47:47 Дуэлянт №1 услышал щелчок курка
-11:47:47 Дуэлянт №2 услышал щелчок курка
-11:47:51 Дуэлянт №1 передал револьвер
+15:15:33 Duelist #2 put the gun to his head
+15:15:35 Duelist #2 pulled the trigger
+15:15:35 Duelist #1 heard the click of a hammer
+15:15:35 Duelist #2 heard the click of a hammer
+15:15:40 Duelist #2 handed revolver
 
-11:47:51 Дуэлянт №2 приставил дуло к своему виску
-11:47:54 Дуэлянт №2 нажал на спусковой крючок
-11:47:54 Дуэлянт №1 услышал щелчок курка
-11:47:54 Дуэлянт №2 услышал щелчок курка
-11:47:56 Дуэлянт №2 передал револьвер
+15:15:40 Duelist #1 put the gun to his head
+15:15:45 Duelist #1 pulled the trigger
+15:15:45 Duelist #1 heard the click of a hammer
+15:15:45 Duelist #2 heard the click of a hammer
+15:15:47 Duelist #1 handed revolver
 
-11:47:56 Дуэлянт №1 приставил дуло к своему виску
-11:47:57 Дуэлянт №1 нажал на спусковой крючок
-11:47:57 Дуэлянт №1 услышал щелчок курка
-11:47:57 Дуэлянт №2 услышал щелчок курка
-11:47:59 Дуэлянт №1 передал револьвер
+15:15:47 Duelist #2 put the gun to his head
+15:15:53 Duelist #2 pulled the trigger
+15:15:53 Duelist #1 heard the click of a hammer
+15:15:53 Duelist #2 heard the click of a hammer
+15:15:59 Duelist #2 handed revolver
 
-11:47:59 Дуэлянт №2 приставил дуло к своему виску
-11:48:04 Дуэлянт №2 нажал на спусковой крючок
-11:48:04 Дуэлянт №1 услышал выстрел
-11:48:04 Доктор слушает пульс у Дуэлянт №2
-11:48:10 Доктор сказал, что у Дуэлянт №2 нет пульса
-– Finita la comedia! – сказал я доктору.
+15:15:59 Duelist #1 put the gun to his head
+15:16:04 Duelist #1 pulled the trigger
+15:16:04 Duelist #1 heard the click of a hammer
+15:16:04 Duelist #2 heard the click of a hammer
+15:16:08 Duelist #1 handed revolver
+
+15:16:08 Duelist #2 put the gun to his head
+15:16:12 Duelist #2 pulled the trigger
+15:16:12 Duelist #1 heard a shot
+15:16:12 The doctor counts the pulse Duelist #2
+15:16:18 The doctor said that Duelist #2 has no pulse
+— Finita la comedia! I said to the doctor.
 ```
