@@ -17,30 +17,37 @@ Public Property Get пора()
 End Property
 #End If
 Private классы As New Collection
+Private Sub замена(коллекция As Collection, и, Optional элемент = Nothing)
+ If коллекция.Count = 0 Then Exit Sub
+ коллекция.Add элемент, after:=и
+ коллекция.Remove и
+ If Not элемент Is Nothing Then пора и
+End Sub
 Public Sub жди(Optional класс, Optional конструктор = True)
  Dim и As Integer
  If IsMissing(класс) Then 'жди' вызывать из 'главный'
   On Error Resume Next
   For и = классы.Count To 1 Step -1
-   If VarType(классы(и)) = vbObject Then
-    If Not классы(и) Is Nothing Then Application.onTime CallByName(классы(и), "пора", VbGet), "пора" & и, , False
-   End If
+   If Not классы(и) Is Nothing Then Application.onTime CallByName(классы(и), "пора", VbGet), "пора" & и, , False
    классы.Remove и
   Next и
  Else
-  If конструктор Then
-   классы.Add класс 'жди Me' вызывать из конструктора
+  If конструктор Then 'жди Me' вызывать из конструктора
+   For и = классы.Count To 1 Step -1
+    If классы(и) Is Nothing Then
+     замена классы, и, класс
+     Exit Sub
+    End If
+   Next и
+   классы.Add класс
    пора классы.Count
   Else
    On Error Resume Next
    For и = классы.Count To 1 Step -1
-    If VarType(классы(и)) = vbObject Then
-     If класс Is классы(и) Then 'жди Me, False' вызывать из деструктора
-      Application.onTime CallByName(классы(и), "пора", VbGet), "пора" & и, , False
-      классы.Add Nothing, after:=и
-      классы.Remove и
-      Exit Sub
-     End If
+    If класс Is классы(и) Then 'жди Me, False' вызывать из деструктора
+     Application.onTime CallByName(классы(и), "пора", VbGet), "пора" & и, , False
+     замена классы, и
+     Exit Sub
     End If
    Next и
   End If
