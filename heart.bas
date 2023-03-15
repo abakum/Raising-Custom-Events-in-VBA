@@ -23,25 +23,29 @@ Public Sub expect(Optional Class, Optional constructor = True)
  If IsMissing(Class) Then 'expect' call from 'main'
   On Error Resume Next
   For i = classes.Count To 1 Step -1
-   If VarType(classes(i)) = vbObject Then
-    If Not classes(i) Is Nothing Then Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
-   End If
+   If Not classes(i) Is Nothing Then Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
    classes.Remove i
   Next i
  Else
-  If constructor Then
-   classes.Add Class 'expect Me' call from constructor
+  If constructor Then 'expect Me' call from constructor
+   For i = classes.Count To 1 Step -1
+    If classes(i) Is Nothing Then
+     classes.Add Class, after:=i
+     classes.Remove i
+     onTime i
+     Exit Sub
+    End If
+   Next i
+   classes.Add Class
    onTime classes.Count
   Else
    On Error Resume Next
    For i = classes.Count To 1 Step -1
-    If VarType(classes(i)) = vbObject Then
-     If Class Is classes(i) Then 'expect Me, False' call from destructor
-      Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
-      classes.Add Nothing, after:=i
-      classes.Remove i
-      Exit Sub
-     End If
+    If Class Is classes(i) Then 'expect Me, False' call from destructor
+     Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
+     classes.Add Nothing, after:=i
+     classes.Remove i
+     Exit Sub
     End If
    Next i
   End If
@@ -49,7 +53,7 @@ Public Sub expect(Optional Class, Optional constructor = True)
 End Sub
 Public Sub onTime(i)
  On Error Resume Next
- CallByName classes(öåëîå), "onTime", VbLet, i
+ CallByName classes(i), "onTime", VbLet, i
 End Sub
 'onTimeX is a substitute for duelist(X).onTime=X because Application.onTime requires a procedure in a regular module
 Public Sub onTime1(): onTime 1: End Sub
