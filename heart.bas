@@ -18,9 +18,9 @@ End Property
 #End If
 
 Private classes As New Collection
-Public Sub expect(Optional Class, Optional constructor = True)
+Public Sub expect(Optional class, Optional constructor = True)
  Dim i As Integer
- If IsMissing(Class) Then 'expect' call from 'main'
+ If IsMissing(class) Then 'expect' call from 'main'
   On Error Resume Next
   For i = classes.Count To 1 Step -1
    If Not classes(i) Is Nothing Then Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
@@ -30,18 +30,18 @@ Public Sub expect(Optional Class, Optional constructor = True)
   If constructor Then 'expect Me' call from constructor
    For i = classes.Count To 1 Step -1
     If classes(i) Is Nothing Then
-     classes.Add Class, after:=i
+     classes.Add class, after:=i
      classes.Remove i
      onTime i
      Exit Sub
     End If
    Next i
-   classes.Add Class
+   classes.Add class
    onTime classes.Count
   Else
    On Error Resume Next
    For i = classes.Count To 1 Step -1
-    If Class Is classes(i) Then 'expect Me, False' call from destructor
+    If class Is classes(i) Then 'expect Me, False' call from destructor
      Application.onTime CallByName(classes(i), "onTime", VbGet), "onTime" & i, , False
      classes.Add Nothing, after:=i
      classes.Remove i
